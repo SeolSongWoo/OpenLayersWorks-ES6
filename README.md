@@ -35,8 +35,8 @@ const vworldMap = new VworldMap('your-tile-source-url'); // In the current code,
 3. Use the provided methods to manage layers, markers, and events on your VworldMap instance.  
   
 ## Examples  
-Here are some example usage snippets for the VworldMap library:
-+Adding a marker to the map:
+Here are some example usage snippets for the VworldMap library:  
++ Adding a marker to the map:
 ```javascript
 vworldMap.addMarker({ coordinates: [longitude, latitude], name: 'exampleMarker' }, markerType);
 ```
