@@ -27,9 +27,16 @@ This javascript provides a convenient way to work with Vworld map tiles using Op
 
 ```javascript
 import { VworldMap } from './path/to/VworldMap.js';
-````
-
+```
 2. Create a new VworldMap instance with the desired tile source URL:
 ```javascript
-const vworldMap = new VworldMap('your-tile-source-url');
-
+const vworldMap = new VworldMap('your-tile-source-url'); // In the current code, the XYZ source is used as the basis for the tile source.  
+```
+3. Use the provided methods to manage layers, markers, and events on your VworldMap instance.  
+  
+## Examples  
+Here are some example usage snippets for the VworldMap library:
++Adding a marker to the map:
+```javascript
+vworldMap.addMarker({ coordinates: [longitude, latitude], name: 'exampleMarker' }, markerType);
+```
