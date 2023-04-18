@@ -40,3 +40,23 @@ Here are some example usage snippets for the VworldMap library:
 ```javascript
 vworldMap.addMarker({ coordinates: [longitude, latitude], name: 'exampleMarker' }, markerType);
 ```
++ Adding a WMS layer to the map:
+```javascript
+vworldMap.addWMSLayer({
+  url: 'your-wms-service-url',
+  LayerName: 'WMSLayerName',
+  minZoom: 0,
+  maxZoom: 18,
+  zIndex: 2,
+  id: 'uniqueLayerId'
+});
+```
++ Setting a custom event handler for marker clicks:  
+```javascript
+vworldMap.setMarkerClickEvent((event) => {
+  // Your custom event handler logic
+});
+```
+  
+  
+For more examples and details on the available methods, please refer to the source code of the VworldMap class.
