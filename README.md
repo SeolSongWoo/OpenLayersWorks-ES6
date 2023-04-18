@@ -27,3 +27,8 @@ This javascript provides a convenient way to work with Vworld map tiles using Op
 
 ```javascript
 import { VworldMap } from './path/to/VworldMap.js';
+
+2. Create a new VworldMap instance with the desired tile source URL:
+```javascript
+const vworldMap = new VworldMap('your-tile-source-url');
+
