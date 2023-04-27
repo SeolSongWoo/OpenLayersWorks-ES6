@@ -95,4 +95,14 @@ export default class MarkerManager {
     getMarkersCoordinate(markers) {
         return markers.map(marker => marker.getGeometry().getCoordinates());
     }
+
+    removeMarkerByName(markersName) {
+        this.vectorSource.getFeatures().forEach(feature => {
+            if (feature.get('name') === markersName) {
+                this.vectorSource.removeFeature(feature);
+            }
+        });
+    }
+
+
 }

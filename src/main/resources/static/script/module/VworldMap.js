@@ -21,7 +21,21 @@ class VworldMap {
             source: new ol.source.XYZ({
                 url: url
             }),
+            zIndex: 0
+        });
+
+        this.vworldHybridLayer = new ol.layer.Tile({
+            title: 'Vworld Map',
+            visible: true,
+            source: new ol.source.XYZ({
+                url: `http://api.vworld.kr/req/wmts/1.0.0/1DACF4FB-1200-30A2-913E-696F78F566AD/Hybrid/{z}/{y}/{x}.png`
+            }),
             zIndex: 1
+        });
+
+        this.vworldGroupLayer = new ol.layer.Group({
+            title : 'Vworld Group Map',
+            layers: [this.vworldMapLayer,this.vworldHybridLayer],
         });
 
         this.view = new ol.View({
@@ -34,7 +48,7 @@ class VworldMap {
 
         this.map = new ol.Map({
             target: 'map',
-            layers: [this.vworldMapLayer],
+            layers: [this.vworldGroupLayer],
         });
 
         this.map.setView(this.view);
@@ -75,6 +89,10 @@ class VworldMap {
         this.markerManager.addMarker(options, type);
     }
 
+    removeMarkerByName(markerName) {
+        this.markerManager.removeMarkerByName(markerName);
+    }
+
     /**
      * Enables or disables the marker creation on map click.
      * @param {boolean} boolean - True to enable marker creation on click, false otherwise.
@@ -104,11 +122,13 @@ class VworldMap {
     /**
      * Adds a polyline to the map based on the given coordinates.
      * @param {Array} markersCoordinate - The array of coordinates for the polyline.
+     * @param {string} name - The string of Polyline Object name.
      */
-    setPolyline(markersCoordinate) {
+    setPolyline(markersCoordinate,name) {
         const lineString = new ol.geom.LineString(markersCoordinate);
         const lineFeature = new ol.Feature({
-            geometry: lineString
+            geometry: lineString,
+            name:name
         });
 
         const lineStyle = new ol.style.Style({
@@ -120,27 +140,6 @@ class VworldMap {
 
         lineFeature.setStyle(lineStyle);
         this.vectorSource.addFeature(lineFeature);
-    }
-
-    /**
-     * Sets a scenario for the map by sending an API request.
-     * @param {Object} scenario - The scenario object.
-     */
-    async setScenarioSec(scenario) {
-        try {
-            const response = await fetch('/api/scenario/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(scenario),
-            });
-            const jsonResponse = await response.json();
-        } catch (error) {
-            alert(error);
-            return;
-        }
-        alert('정상적으로 등록되었습니다. 자세한 세부설정은 시나리오 설정에서 해주십시오.');
     }
 
     /**
@@ -165,6 +164,8 @@ class VworldMap {
     getLayerById(layerId) {
         return this.layerManager.getLayerById(layerId);
     }
+
+
 
 }
 

@@ -34,7 +34,7 @@ export default class EventListenerManager {
             }
 
             if (feature && this.clickEventFunction) {
-                this.clickEventFunction(evt, feature, feature.get('id'));
+                this.clickEventFunction(evt, feature, feature.get('id'),feature.get('name'));
             }
         });
     }
